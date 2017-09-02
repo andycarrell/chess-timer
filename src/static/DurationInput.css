@@ -1,0 +1,21 @@
+.duration-input {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0px 10px;
+
+  background-color: grey;
+  border-radius: 3px;
+}
+
+.duration-input--input {
+  max-width: 250px;
+  padding: 10px;
+
+	font-size: 40px;
+	line-height: 64px;
+}
+
+.duration-input--logo {
+  height: 40px;
+}
