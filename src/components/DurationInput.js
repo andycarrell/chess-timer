@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SubmitButton } from './IconButton';
+import { SubmitButton, ClearButton } from './IconButton';
 import '../static/DurationInput.css';
 
 export default class DurationInput extends Component {
@@ -20,6 +20,7 @@ export default class DurationInput extends Component {
         />
       </div>
       <SubmitButton onClick={this.handleOnSubmit} />
+      <ClearButton onClick={this.props.onCancel}/>
     </div>;
 
   handleOnChange = e => {

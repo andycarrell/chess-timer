@@ -40,6 +40,7 @@ export default class App extends Component {
       <DurationInput
         defaultValue={this.state.duration}
         onClick={this.handleOnInputSubmit}
+        onCancel={this.handleOnInputCancel}
       />
     </div>;
 
@@ -57,6 +58,13 @@ export default class App extends Component {
       isPaused: false,
       isUpdating: false,
       duration: duration + 0.1E-10,
+    }));
+  }
+
+  handleOnInputCancel = () => {
+    this.setState(() => ({
+      isPaused: false,
+      isUpdating: false,
     }));
   }
 
