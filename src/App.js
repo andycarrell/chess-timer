@@ -4,7 +4,7 @@ import RestartButton from './components/RestartButton';
 import PauseButton from './components/PauseButton';
 import DurationButton from './components/DurationButton';
 import DurationInput from './components/DurationInput';
-import { toggleFor } from './helpers/setState';
+import { toggleFor } from './helpers';
 import './static/App.css';
 
 const DURATION_START_TOTAL = 600;
@@ -20,16 +20,35 @@ class App extends Component {
     };
   }
 
-  handleOnPaused = () => {
-    this.setState(toggleFor('isPaused'));
-  }
+  render = () =>
+    <div className="App">
+      <Timers
+        startDuration={this.state.duration}
+        isPaused={this.state.isPaused}
+      >
+        {this.state.isUpdating
+          ? this.renderInput()
+          : this.renderActionButtons()
+        }
+      </Timers>
+    </div>;
 
-  handleOnInputClick = () => {
-    this.setState(() => ({
-      isUpdating: true,
-      isPaused: true,
-     }));
-  }
+  renderInput = () =>
+    <div className="content-margin">
+      <DurationInput
+        defaultValue={this.state.duration}
+        onClick={this.handleOnInputSubmit}
+      />
+    </div>;
+
+  renderActionButtons = () =>
+    <div className="pause-button">
+      <RestartButton onClick={this.handleOnRestart}/>
+      <div style={{ padding: '10px' }} />
+      <PauseButton onClick={this.handleOnPaused} />
+      <div style={{ padding: '5px' }} />
+      <DurationButton onClick={this.handleOnInputClick} />
+    </div>;
 
   handleOnInputSubmit = duration => {
     this.setState(() => ({
@@ -45,37 +64,15 @@ class App extends Component {
     }));
   }
 
-  renderActionButtons = () =>
-    <div className="pause-button">
-      <RestartButton onClick={this.handleOnRestart}/>
-      <div style={{ padding: '10px' }} />
-      <PauseButton onClick={this.handleOnPaused} />
-      <div style={{ padding: '5px' }} />
-      <DurationButton onClick={this.handleOnInputClick} />
-    </div>;
+  handleOnPaused = () => {
+    this.setState(toggleFor('isPaused'));
+  }
 
-  renderInput = () =>
-    <div className="content-margin">
-      <DurationInput
-        defaultValue={this.state.duration}
-        onClick={this.handleOnInputSubmit}
-      />
-    </div>;
-
-  render() {
-    return (
-      <div className="App">
-        <Timers
-          startDuration={this.state.duration}
-          isPaused={this.state.isPaused}
-        >
-          {this.state.isUpdating
-            ? this.renderInput()
-            : this.renderActionButtons()
-          }
-        </Timers>
-      </div>
-    );
+  handleOnInputClick = () => {
+    this.setState(() => ({
+      isUpdating: true,
+      isPaused: true,
+    }));
   }
 }
 

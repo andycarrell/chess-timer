@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Duration from './Duration';
-import '../static/Timer.css'
+import { decrementFor, everySecondRun } from '../helpers';
+import '../static/Timer.css';
 
 export default class Timer extends Component {
   constructor(props) {
@@ -14,6 +15,29 @@ export default class Timer extends Component {
   }
 
   get isValid() { return this.state.duration > 0; }
+
+  render = () =>
+    <div
+      className={`
+        content-margin
+        ${this.props.className || ''}
+      `}
+    >
+      <button
+        className={`
+          timer-button
+          ${this.props.isActive && this.isValid ? 'timer-button--active' : ''}
+          ${!this.isValid ? 'timer-button--invalid' : ''}
+        `}
+        onClick={this.handleOnClick}
+      >
+        <Duration duration={this.state.duration} />
+      </button>
+    </div>;
+
+  handleOnClick = () => {
+    this.isValid && this.props.onClick(this.props.isActive);
+  }
 
   componentDidMount() {
     this.props.isActive && this.startDecrement();
@@ -33,38 +57,15 @@ export default class Timer extends Component {
     }
   }
 
-  handleOnClick = () => {
-    this.isValid && this.props.onClick(this.props.isActive);
-  }
-
-  decrement = () => {
-    this.setState(prevState => ({ duration: prevState.duration - 1 }));
-  }
-
   stopDecrement = () => {
     this.interval && clearInterval(this.interval);
   }
 
   startDecrement = () => {
-    this.interval = setInterval(this.decrement, 1000);
+    this.interval = everySecondRun(this.decrement);
   }
 
-  render = () =>
-    <div
-      className={`
-        content-margin
-        ${this.props.className ? this.props.className : ''}
-      `}
-    >
-      <button
-        className={`
-          timer-button
-          ${this.props.isActive && this.isValid ? 'timer-button--active' : ''}
-          ${!this.isValid ? 'timer-button--invalid' : ''}
-        `}
-        onClick={this.handleOnClick}
-      >
-        <Duration duration={this.state.duration} />
-      </button>
-    </div>;
+  decrement = () => {
+    this.setState(decrementFor('duration'));
+  }
 }

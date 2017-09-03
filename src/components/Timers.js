@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Timer from './Timer';
-import { toggleFor } from '../helpers/setState';
+import { toggleFor } from '../helpers';
 
 const INITIAL_STATE = {
   isTop: false,
@@ -19,14 +19,27 @@ export default class Timers extends Component {
     this.state = INITIAL_STATE;
   }
 
-  get isDefault() {
-    return !this.state.isTop && !this.state.isBottom;
-  }
+  get isDefault() { return !this.state.isTop && !this.state.isBottom; }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.startDuration !== this.props.startDuration) {
-      this.setState(() => INITIAL_STATE);
-    }
+  render() {
+    const { isPaused, startDuration } = this.props;
+
+    return (
+      <div className="body">
+        <Timer
+          className="vertical-flip"
+          onClick={this.handleOnClick('top')}
+          duration={startDuration}
+          isActive={!isPaused && this.state.isTop}
+        />
+        {this.props.children}
+        <Timer
+          onClick={this.handleOnClick('bottom')}
+          duration={startDuration}
+          isActive={!isPaused && this.state.isBottom}
+        />
+      </div>
+    );
   }
 
   handleOnClick = id => isActive => {
@@ -38,24 +51,9 @@ export default class Timers extends Component {
     }
   }
 
-  render() {
-    const { isPaused } = this.props;
-
-    return (
-      <div className="body">
-        <Timer
-          className="vertical-flip"
-          onClick={this.handleOnClick('top')}
-          duration={this.props.startDuration}
-          isActive={!isPaused && this.state.isTop}
-        />
-        {this.props.children}
-        <Timer
-          onClick={this.handleOnClick('bottom')}
-          duration={this.props.startDuration}
-          isActive={!isPaused && this.state.isBottom}
-        />
-      </div>
-    );
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.startDuration !== this.props.startDuration) {
+      this.setState(() => INITIAL_STATE);
+    }
   }
 }
