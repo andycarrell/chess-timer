@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { SubmitButton } from './IconButton';
 import '../static/DurationInput.css';
-import checkBox from '../static/check-box.svg';
 
 export default class DurationInput extends Component {
   constructor(props) {
@@ -11,18 +11,15 @@ export default class DurationInput extends Component {
 
   render = () =>
     <div className="duration-input">
-      <input
-        className="text duration-input--input"
-        ref={di => this.durationInput = di}
-        placeholder={Math.trunc(this.props.defaultValue)}
-        onChange={this.handleOnChange}
-      />
-      <button
-        className="duration-input--button"
-        onClick={this.handleOnSubmit}
-      >
-        <img src={checkBox} className="duration-input--logo" alt="logo" />
-      </button>
+      <div>
+        <input
+          className="text duration-input--input"
+          ref={di => this.durationInput = di}
+          placeholder={Math.trunc(this.props.defaultValue)}
+          onChange={this.handleOnChange}
+        />
+      </div>
+      <SubmitButton onClick={this.handleOnSubmit} />
     </div>;
 
   handleOnChange = e => {

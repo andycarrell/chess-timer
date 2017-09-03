@@ -2,6 +2,7 @@ import React from 'react';
 import pauseSrc from '../static/pause-button.svg';
 import refreshSrc from '../static/refresh-button.svg';
 import durationSrc from '../static/watch-with-blank-face.svg';
+import checkBoxSrc from '../static/check-box.svg';
 import '../static/IconButton.css';
 
 const createIconButtonFor = src => props =>
@@ -12,3 +13,4 @@ const createIconButtonFor = src => props =>
 export const PauseButton = createIconButtonFor(pauseSrc);
 export const RestartButton = createIconButtonFor(refreshSrc);
 export const DurationButton = createIconButtonFor(durationSrc);
+export const SubmitButton = createIconButtonFor(checkBoxSrc);

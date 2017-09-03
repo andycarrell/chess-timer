@@ -9,13 +9,10 @@
 }
 
 .duration-input--input {
-  max-width: 250px;
+  width: 100%;
+
   padding: 10px;
 
 	font-size: 40px;
 	line-height: 64px;
-}
-
-.duration-input--logo {
-  height: 40px;
 }
