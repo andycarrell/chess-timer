@@ -27,6 +27,11 @@
   margin: 20px 20px;
 }
 
+.action-buttons {
+  display: flex;
+  justify-content: center;
+}
+
 .text {
   font-family: Verdana, Geneva, sans-serif, monospace;
 	font-style: normal;

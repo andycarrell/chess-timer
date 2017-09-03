@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Timers from './components/Timers';
-import RestartButton from './components/RestartButton';
-import PauseButton from './components/PauseButton';
-import DurationButton from './components/DurationButton';
+import {
+  RestartButton,
+  PauseButton,
+  DurationButton,
+} from './components/IconButton';
 import DurationInput from './components/DurationInput';
 import { toggleFor } from './helpers';
 import './static/App.css';
 
 const DURATION_START_TOTAL = 600;
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
 
@@ -42,7 +44,7 @@ class App extends Component {
     </div>;
 
   renderActionButtons = () =>
-    <div className="pause-button">
+    <div className="action-buttons">
       <RestartButton onClick={this.handleOnRestart}/>
       <div style={{ padding: '10px' }} />
       <PauseButton onClick={this.handleOnPaused} />
@@ -75,5 +77,3 @@ class App extends Component {
     }));
   }
 }
-
-export default App;

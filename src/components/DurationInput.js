@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../static/DurationInput.css'
+import '../static/DurationInput.css';
 import checkBox from '../static/check-box.svg';
 
 export default class DurationInput extends Component {
