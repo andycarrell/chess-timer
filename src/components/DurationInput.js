@@ -21,7 +21,7 @@ export default class DurationInput extends Component {
       </div>
       <div className="duration-input--actions">
         <SubmitButton onClick={this.handleOnSubmit} />
-        <ClearButton onClick={this.props.onCancel}/>
+        <ClearButton onClick={this.props.onCancel} />
       </div>
     </div>;
 
