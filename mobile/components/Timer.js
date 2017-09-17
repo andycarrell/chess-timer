@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import Duration from './Duration';
 import Button from './Button';
 
@@ -33,6 +32,7 @@ export default class Timer extends Component {
         styles.button,
         this.props.isActive && styles.buttonIsActive,
         !this.isValid && styles.buttonIsInvalid,
+        this.props.style,
       ]}
       onPress={this.handleOnClick}
     >
@@ -75,3 +75,7 @@ export default class Timer extends Component {
     this.setState(decrementFor('duration'));
   }
 }
+
+Timer.defaultProps = {
+  style: {},
+};

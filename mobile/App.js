@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
-import Timer from './components/Timer';
-
-import { toggleFor } from './helpers';
+import { View } from 'react-native';
+import Timers from './components/Timers';
 
 import styles from './styles/styles';
 
@@ -14,17 +12,15 @@ export default class App extends Component {
 
     this.state = {
       duration: DURATION_START_TOTAL,
-      isActive: true,
     };
   }
 
   render() {
     return (
       <View style={styles.body}>
-        <Timer
-          onClick={() => this.setState(toggleFor('isActive'))}
-          duration={this.state.duration}
-          isActive={this.state.isActive}
+        <Timers
+          startDuration={this.state.duration}
+          isPaused={false}
         />
       </View>
     );

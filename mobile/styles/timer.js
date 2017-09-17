@@ -20,8 +20,8 @@ const duration = {
 };
 
 const durationText = {
-	height: 120,
-  fontSize: 80,
+	height: 100,
+  fontSize: 70,
 };
 
 export default StyleSheet.create({
