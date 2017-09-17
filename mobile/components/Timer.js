@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Duration from './Duration';
 import Button from './Button';
 
+import { everySecondRun, decrementFor } from '../helpers';
+
 import timerStyles from '../styles/timer';
 import hStyles from '../styles/styles';
 
@@ -10,15 +12,6 @@ const styles = {
   ...timerStyles,
   ...hStyles,
 };
-
-export const decrementFor = key => prevState => ({
-  [key]: prevState[key] - 1,
-});
-
-const setIntervalAt = seconds => fn =>
-  setInterval(fn, seconds * 1000);
-
-export const everySecondRun = setIntervalAt(1);
 
 export default class Timer extends Component {
   constructor(props) {

@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Timer from './components/Timer';
 
+import { toggleFor } from './helpers';
+
 import styles from './styles/styles';
 
 const DURATION_START_TOTAL = 600;
-
-export const toggleFor = key => prevState => ({
-  [key]: !prevState[key],
-});
 
 export default class App extends Component {
   constructor(props) {
