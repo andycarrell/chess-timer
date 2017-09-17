@@ -20,6 +20,12 @@ const content = {
   alignSelf: 'stretch',
 };
 
+const actionButtons = {
+  alignSelf: 'stretch',
+  flexDirection: 'row',
+  justifyContent: 'center',
+};
+
 const verticalFlip = {
   transform: [{ rotate: '180deg' }]
 };
@@ -28,5 +34,6 @@ export default StyleSheet.create({
   contentMargin,
   body,
   content,
+  actionButtons,
   verticalFlip,
 });

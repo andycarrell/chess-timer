@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import Timers from './components/Timers';
+import { RestartButton } from './components/IconButton';
 
 import styles from './styles/styles';
 
@@ -15,14 +16,24 @@ export default class App extends Component {
     };
   }
 
-  render() {
-    return (
-      <View style={styles.body}>
-        <Timers
-          startDuration={this.state.duration}
-          isPaused={false}
-        />
-      </View>
-    );
+  render = () =>
+    <View style={styles.body}>
+      <Timers
+        startDuration={this.state.duration}
+        isPaused={false}
+      >
+      {this.renderActionButtons()}
+      </Timers>
+    </View>;
+
+  renderActionButtons = () =>
+    <View style={styles.actionButtons}>
+      <RestartButton onPress={this.handleOnRestart}/>
+    </View>;
+
+  handleOnRestart = () => {
+    this.setState(prevState => ({
+      duration: prevState.duration + 0.1E-10
+    }));
   }
 }

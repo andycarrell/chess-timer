@@ -36,6 +36,7 @@ export default class Timers extends Component {
           duration={startDuration}
           isActive={!isPaused && this.state.isTop}
         />
+        {this.props.children}
         <Timer
           onClick={this.handleOnClick('bottom')}
           duration={startDuration}
