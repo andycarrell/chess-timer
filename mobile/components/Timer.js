@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Duration from './Duration';
+import Button from './Button';
 
 import timerStyles from '../styles/timer';
 import hStyles from '../styles/styles';
@@ -33,19 +34,19 @@ export default class Timer extends Component {
   get isValid() { return this.state.duration > 0; }
 
   render = () =>
-    <View style={[
+    <Button
+      style={[
         styles.contentMargin,
         styles.button,
         this.props.isActive && styles.buttonIsActive,
         !this.isValid && styles.buttonIsInvalid,
       ]}
+      onPress={this.handleOnClick}
     >
-      <TouchableOpacity onPress={this.handleOnClick}>
-        <Duration
-          duration={this.state.duration}
-        />
-      </TouchableOpacity>
-    </View>;
+      <Duration
+        duration={this.state.duration}
+      />
+    </Button>;
 
   handleOnClick = () => {
     this.isValid && this.props.onClick(this.props.isActive);
