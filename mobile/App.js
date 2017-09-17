@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import Timers from './components/Timers';
-import { RestartButton } from './components/IconButton';
+import { RestartButton, PauseButton } from './components/IconButton';
+import { toggleFor } from './helpers';
 
 import styles from './styles/styles';
 
@@ -13,6 +14,7 @@ export default class App extends Component {
 
     this.state = {
       duration: DURATION_START_TOTAL,
+      isPaused: false,
     };
   }
 
@@ -20,7 +22,7 @@ export default class App extends Component {
     <View style={styles.body}>
       <Timers
         startDuration={this.state.duration}
-        isPaused={false}
+        isPaused={this.state.isPaused}
       >
       {this.renderActionButtons()}
       </Timers>
@@ -28,12 +30,18 @@ export default class App extends Component {
 
   renderActionButtons = () =>
     <View style={styles.actionButtons}>
-      <RestartButton onPress={this.handleOnRestart}/>
+      <PauseButton onPress={this.handleOnPaused} />
+      <View style={{ padding: 10 }} />
+      <RestartButton onPress={this.handleOnRestart} />
     </View>;
 
   handleOnRestart = () => {
     this.setState(prevState => ({
       duration: prevState.duration + 0.1E-10
     }));
+  }
+
+  handleOnPaused = () => {
+    this.setState(toggleFor('isPaused'));
   }
 }
