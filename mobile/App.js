@@ -24,7 +24,7 @@ export default class App extends Component {
         startDuration={this.state.duration}
         isPaused={this.state.isPaused}
       >
-      {this.renderActionButtons()}
+        {this.renderActionButtons()}
       </Timers>
     </View>;
 
@@ -37,7 +37,8 @@ export default class App extends Component {
 
   handleOnRestart = () => {
     this.setState(prevState => ({
-      duration: prevState.duration + 0.1E-10
+      duration: prevState.duration + 0.1E-10,
+      isPaused: false,
     }));
   }
 

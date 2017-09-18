@@ -70,7 +70,8 @@ export default class App extends Component {
 
   handleOnRestart = () => {
     this.setState(prevState => ({
-      duration: prevState.duration + 0.1E-10
+      duration: prevState.duration + 0.1E-10,
+      isPaused: false,
     }));
   }
 
