@@ -9,7 +9,7 @@ import DurationInput from './components/DurationInput';
 import { toggleFor } from './helpers';
 import './static/App.css';
 
-const DURATION_START_TOTAL = 600;
+const DURATION_START_TOTAL = 300;
 
 export default class App extends Component {
   constructor(props) {

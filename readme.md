@@ -5,7 +5,7 @@
 
 `cd ./chess-timer`
 
-`npm i`
+`npm install`
 
 `npm start`
 
