@@ -3,7 +3,7 @@
   "name": "Simple Chess Timer",
   "icons": [
     {
-      "src": "http://icons.iconarchive.com/icons/blackvariant/shadow135-system/128/Chess-icon.png",
+      "src": "https://s3.amazonaws.com/chess-timer-assets/app-icon-128.png",
       "sizes": "192x192",
       "type": "image/png"
     }
