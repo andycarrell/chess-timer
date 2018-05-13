@@ -12,15 +12,11 @@ import './static/App.css';
 const DURATION_START_TOTAL = 300;
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isPaused: false,
-      isUpdating: false,
-      duration: DURATION_START_TOTAL,
-    };
-  }
+  state = {
+    isPaused: false,
+    isUpdating: false,
+    duration: DURATION_START_TOTAL,
+  };
 
   render = () =>
     <div className="App">

@@ -13,11 +13,7 @@ const start = id => () => ({
 });
 
 export default class Timers extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = INITIAL_STATE;
-  }
+  state = INITIAL_STATE;
 
   get isDefault() { return !this.state.isTop && !this.state.isBottom; }
 
