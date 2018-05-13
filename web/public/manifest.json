@@ -1,6 +1,6 @@
 {
   "short_name": "Timer",
-  "name": "Simple Chess Timer",
+  "name": "Chess Timer",
   "icons": [
     {
       "src": "https://s3.amazonaws.com/chess-timer-assets/app-icon-128.png",
