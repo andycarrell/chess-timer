@@ -15,7 +15,7 @@ export default class DurationInput extends Component {
         <input
           className="text duration-input--input"
           ref={di => this.durationInput = di}
-          placeholder={Math.trunc(this.props.defaultValue)}
+          placeholder="Duration (min)"
           onChange={this.handleOnChange}
         />
       </div>

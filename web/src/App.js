@@ -53,7 +53,7 @@ export default class App extends Component {
     this.setState(() => ({
       isPaused: false,
       isUpdating: false,
-      duration: duration + 0.1E-10,
+      duration: duration * 60 + 0.1E-10,
     }));
   }
 
