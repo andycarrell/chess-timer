@@ -15,7 +15,7 @@ export default class DurationInput extends Component {
         <input
           className="text duration-input--input"
           ref={di => this.durationInput = di}
-          placeholder="Duration (min)"
+          type="number"
           onChange={this.handleOnChange}
         />
       </div>
@@ -30,7 +30,7 @@ export default class DurationInput extends Component {
   }
 
   handleOnSubmit = () => {
-    this.props.onClick(Number(this.value || 0));
+    this.props.onClick(this.value || 0);
   }
 
   componentDidMount() {

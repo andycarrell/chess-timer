@@ -9,7 +9,7 @@ import DurationInput from './components/DurationInput';
 import { toggleFor } from './helpers';
 import './static/App.css';
 
-const DURATION_START_TOTAL = 300;
+const DURATION_START_TOTAL = 600;
 
 export default class App extends Component {
   state = {
@@ -34,7 +34,7 @@ export default class App extends Component {
   renderInput = () =>
     <div className="content-margin">
       <DurationInput
-        defaultValue={this.state.duration}
+        defaultValue={this.state.duration / 60}
         onClick={this.handleOnInputSubmit}
         onCancel={this.handleOnInputCancel}
       />
