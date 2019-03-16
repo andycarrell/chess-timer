@@ -11,10 +11,10 @@
 }
 
 .timer-button--invalid {
-  background-color: #FF4136;
+  background-color: #ff4136;
 }
 
 .timer-duration {
-	line-height: 125px;
+  line-height: 125px;
   font-size: 80px;
 }

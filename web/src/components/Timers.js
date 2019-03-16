@@ -8,14 +8,16 @@ const INITIAL_STATE = {
 };
 
 const start = id => () => ({
-  isTop: (id === 'bottom'),
-  isBottom: (id === 'top'),
+  isTop: id === 'bottom',
+  isBottom: id === 'top',
 });
 
 export default class Timers extends Component {
   state = INITIAL_STATE;
 
-  get isDefault() { return !this.state.isTop && !this.state.isBottom; }
+  get isDefault() {
+    return !this.state.isTop && !this.state.isBottom;
+  }
 
   render() {
     const { isPaused, startDuration } = this.props;
@@ -45,7 +47,7 @@ export default class Timers extends Component {
     } else if (this.isDefault) {
       this.setState(start(id));
     }
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.startDuration !== this.props.startDuration) {

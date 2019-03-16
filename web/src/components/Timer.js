@@ -14,9 +14,11 @@ export default class Timer extends Component {
     this.interval = null;
   }
 
-  get isValid() { return this.state.duration > 0; }
+  get isValid() {
+    return this.state.duration > 0;
+  }
 
-  render = () =>
+  render = () => (
     <div
       className={`
         content-margin
@@ -33,11 +35,12 @@ export default class Timer extends Component {
       >
         <Duration duration={this.state.duration} />
       </button>
-    </div>;
+    </div>
+  );
 
   handleOnClick = () => {
     this.isValid && this.props.onClick(this.props.isActive);
-  }
+  };
 
   componentDidMount() {
     this.props.isActive && this.startDecrement();
@@ -59,13 +62,13 @@ export default class Timer extends Component {
 
   stopDecrement = () => {
     this.interval && clearInterval(this.interval);
-  }
+  };
 
   startDecrement = () => {
     this.interval = everySecondRun(this.decrement);
-  }
+  };
 
   decrement = () => {
     this.setState(decrementFor('duration'));
-  }
+  };
 }

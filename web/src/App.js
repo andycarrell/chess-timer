@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Timers from './components/Timers';
-import {
-  RestartButton,
-  PauseButton,
-  DurationButton,
-} from './components/IconButton';
+import { RestartButton, PauseButton, DurationButton } from './components/IconButton';
 import DurationInput from './components/DurationInput';
 import { toggleFor } from './helpers';
 import './static/App.css';
@@ -18,67 +14,64 @@ export default class App extends Component {
     duration: DURATION_START_TOTAL,
   };
 
-  render = () =>
+  render = () => (
     <div className="App">
-      <Timers
-        startDuration={this.state.duration}
-        isPaused={this.state.isPaused}
-      >
-        {this.state.isUpdating
-          ? this.renderInput()
-          : this.renderActionButtons()
-        }
+      <Timers startDuration={this.state.duration} isPaused={this.state.isPaused}>
+        {this.state.isUpdating ? this.renderInput() : this.renderActionButtons()}
       </Timers>
-    </div>;
+    </div>
+  );
 
-  renderInput = () =>
+  renderInput = () => (
     <div className="content-margin">
       <DurationInput
         defaultValue={this.state.duration / 60}
         onClick={this.handleOnInputSubmit}
         onCancel={this.handleOnInputCancel}
       />
-    </div>;
+    </div>
+  );
 
-  renderActionButtons = () =>
+  renderActionButtons = () => (
     <div className="action-buttons">
-      <RestartButton onClick={this.handleOnRestart}/>
+      <RestartButton onClick={this.handleOnRestart} />
       <div style={{ padding: '10px' }} />
       <PauseButton onClick={this.handleOnPaused} />
       <div style={{ padding: '5px' }} />
       <DurationButton onClick={this.handleOnInputClick} />
-    </div>;
+    </div>
+  );
 
   handleOnInputSubmit = duration => {
     this.setState(() => ({
       isPaused: false,
       isUpdating: false,
-      duration: duration * 60 + 0.1E-10,
+      duration: duration * 60 + 0.1e-10,
     }));
-  }
+  };
 
   handleOnInputCancel = () => {
     this.setState(() => ({
       isPaused: false,
       isUpdating: false,
     }));
-  }
+  };
 
   handleOnRestart = () => {
     this.setState(prevState => ({
-      duration: prevState.duration + 0.1E-10,
+      duration: prevState.duration + 0.1e-10,
       isPaused: false,
     }));
-  }
+  };
 
   handleOnPaused = () => {
     this.setState(toggleFor('isPaused'));
-  }
+  };
 
   handleOnInputClick = () => {
     this.setState(() => ({
       isUpdating: true,
       isPaused: true,
     }));
-  }
+  };
 }
