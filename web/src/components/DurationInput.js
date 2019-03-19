@@ -1,40 +1,33 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { SubmitButton, ClearButton } from './IconButton';
 import '../static/DurationInput.css';
 
-export default class DurationInput extends Component {
-  constructor(props) {
-    super(props);
+export default function DurationInput(props) {
+  const ref = useRef(null);
+  const [value, update] = useState(props.defaultValue);
 
-    this.value = props.defaultValue;
-  }
+  const onChange = useCallback(
+    e => {
+      update(e.target.value);
+    },
+    [update],
+  );
 
-  render = () => (
+  const onSubmitClick = useCallback(() => {
+    props.onClick(value || 0);
+  }, [props.onClick, value]);
+
+  useEffect(() => {
+    ref.current.focus();
+  }, []);
+
+  return (
     <div className="duration-input">
-      <div>
-        <input
-          className="text duration-input--input"
-          ref={di => (this.durationInput = di)}
-          type="number"
-          onChange={this.handleOnChange}
-        />
-      </div>
+      <input className="text duration-input--input" ref={ref} type="number" onChange={onChange} />
       <div className="duration-input--actions">
-        <SubmitButton onClick={this.handleOnSubmit} />
-        <ClearButton onClick={this.props.onCancel} />
+        <SubmitButton onClick={onSubmitClick} />
+        <ClearButton onClick={props.onCancel} />
       </div>
     </div>
   );
-
-  handleOnChange = e => {
-    this.value = e.target.value;
-  };
-
-  handleOnSubmit = () => {
-    this.props.onClick(this.value || 0);
-  };
-
-  componentDidMount() {
-    this.durationInput && this.durationInput.focus();
-  }
 }

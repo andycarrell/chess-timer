@@ -1,77 +1,57 @@
-import React, { Component } from 'react';
-import Timers from './components/Timers';
+import React, { useState, useCallback } from 'react';
+import { useTimersStateContext } from './components/TimersStateContext';
+import TimersWithHooks from './components/TimersWithHooks';
 import { RestartButton, PauseButton, DurationButton } from './components/IconButton';
 import DurationInput from './components/DurationInput';
-import { toggleFor } from './helpers';
 import './static/App.css';
 
 const DURATION_START_TOTAL = 600;
 
-export default class App extends Component {
-  state = {
-    isPaused: false,
-    isUpdating: false,
-    duration: DURATION_START_TOTAL,
-  };
-
-  render = () => (
-    <div className="App">
-      <Timers startDuration={this.state.duration} isPaused={this.state.isPaused}>
-        {this.state.isUpdating ? this.renderInput() : this.renderActionButtons()}
-      </Timers>
-    </div>
+export default function App() {
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [duration, setDuration] = useState(DURATION_START_TOTAL);
+  const { pause, reset } = useTimersStateContext();
+  const pauseAndSetIsUpdatingTo = useCallback(
+    to => () => {
+      pause();
+      setIsUpdating(to);
+    },
+    [pause, setIsUpdating],
+  );
+  const updateDuration = useCallback(
+    updatedDuration => {
+      setDuration(updatedDuration * 60);
+      setIsUpdating(false);
+      reset();
+    },
+    [setDuration, setIsUpdating, reset],
   );
 
-  renderInput = () => (
+  const renderInput = () => (
     <div className="content-margin">
       <DurationInput
-        defaultValue={this.state.duration / 60}
-        onClick={this.handleOnInputSubmit}
-        onCancel={this.handleOnInputCancel}
+        defaultValue={duration / 60}
+        onClick={updateDuration}
+        onCancel={pauseAndSetIsUpdatingTo(false)}
       />
     </div>
   );
 
-  renderActionButtons = () => (
+  const renderActionButtons = () => (
     <div className="action-buttons">
-      <RestartButton onClick={this.handleOnRestart} />
+      <RestartButton onClick={reset} />
       <div style={{ padding: '10px' }} />
-      <PauseButton onClick={this.handleOnPaused} />
+      <PauseButton onClick={pause} />
       <div style={{ padding: '5px' }} />
-      <DurationButton onClick={this.handleOnInputClick} />
+      <DurationButton onClick={pauseAndSetIsUpdatingTo(true)} />
     </div>
   );
 
-  handleOnInputSubmit = duration => {
-    this.setState(() => ({
-      isPaused: false,
-      isUpdating: false,
-      duration: duration * 60 + 0.1e-10,
-    }));
-  };
-
-  handleOnInputCancel = () => {
-    this.setState(() => ({
-      isPaused: false,
-      isUpdating: false,
-    }));
-  };
-
-  handleOnRestart = () => {
-    this.setState(prevState => ({
-      duration: prevState.duration + 0.1e-10,
-      isPaused: false,
-    }));
-  };
-
-  handleOnPaused = () => {
-    this.setState(toggleFor('isPaused'));
-  };
-
-  handleOnInputClick = () => {
-    this.setState(() => ({
-      isUpdating: true,
-      isPaused: true,
-    }));
-  };
+  return (
+    <div className="App">
+      <TimersWithHooks startDuration={duration}>
+        {isUpdating ? renderInput() : renderActionButtons()}
+      </TimersWithHooks>
+    </div>
+  );
 }
