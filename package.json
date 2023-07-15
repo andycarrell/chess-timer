@@ -10,12 +10,13 @@
     "url": "ssh://git@github.com:andycarrell/esbuild-example.git"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "build": "esbuild src/index.js --bundle --minify --outdir=dist --loader:.js=jsx --loader:.svg=dataurl",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prebuild": "npm run prime",
+    "prestart": "npm run prime",
+    "prime": "copyfiles public/* dist --up=1",
+    "start": "conc \"npm run types:check -- --watch\" \"npm run build -- --servedir=dist\"",
     "types:check": "tsc"
   },
   "dependencies": {
@@ -25,8 +26,10 @@
   "devDependencies": {
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
+    "concurrently": "8.2.0",
+    "copyfiles": "2.4.1",
+    "esbuild": "0.18.13",
     "prettier": "3.0.0",
-    "react-scripts": "1.0.12",
     "typescript": "5.1.6"
   }
 }

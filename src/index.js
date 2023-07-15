@@ -1,6 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./static/index.css";
+import { createRoot } from "react-dom/client";
 import App from "./App";
+import "./static/index.css";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const APP_ID = "app";
+const container = document.getElementById(APP_ID);
+
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+} else {
+  console.error(
+    `Couldn't find element with the id: ${APP_ID}, so couldn't render the app!`,
+  );
+}
