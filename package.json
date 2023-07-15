@@ -10,7 +10,7 @@
     "url": "ssh://git@github.com:andycarrell/esbuild-example.git"
   },
   "scripts": {
-    "build": "esbuild src/index.jsx --bundle --minify --outdir=dist --loader:.svg=dataurl",
+    "build": "esbuild src/index.tsx --bundle --minify --outdir=dist --loader:.svg=dataurl",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prebuild": "npm run prime",
