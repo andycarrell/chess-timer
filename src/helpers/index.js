@@ -1,2 +1,2 @@
-export * from './interval';
-export * from './setState';
+export * from "./interval";
+export * from "./setState";

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { SubmitButton, ClearButton } from './IconButton';
-import '../static/DurationInput.css';
+import React, { Component } from "react";
+import { SubmitButton, ClearButton } from "./IconButton";
+import "../static/DurationInput.css";
 
 export default class DurationInput extends Component {
   constructor(props) {
@@ -9,12 +9,12 @@ export default class DurationInput extends Component {
     this.value = props.defaultValue;
   }
 
-  render = () =>
+  render = () => (
     <div className="duration-input">
       <div>
         <input
           className="text duration-input--input"
-          ref={di => this.durationInput = di}
+          ref={(di) => (this.durationInput = di)}
           type="number"
           onChange={this.handleOnChange}
         />
@@ -23,15 +23,16 @@ export default class DurationInput extends Component {
         <SubmitButton onClick={this.handleOnSubmit} />
         <ClearButton onClick={this.props.onCancel} />
       </div>
-    </div>;
+    </div>
+  );
 
-  handleOnChange = e => {
+  handleOnChange = (e) => {
     this.value = e.target.value;
-  }
+  };
 
   handleOnSubmit = () => {
     this.props.onClick(this.value || 0);
-  }
+  };
 
   componentDidMount() {
     this.durationInput && this.durationInput.focus();

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Duration from './Duration';
-import { decrementFor, everySecondRun } from '../helpers';
-import '../static/Timer.css';
+import React, { Component } from "react";
+import Duration from "./Duration";
+import { decrementFor, everySecondRun } from "../helpers";
+import "../static/Timer.css";
 
 export default class Timer extends Component {
   constructor(props) {
@@ -14,30 +14,33 @@ export default class Timer extends Component {
     this.interval = null;
   }
 
-  get isValid() { return this.state.duration > 0; }
+  get isValid() {
+    return this.state.duration > 0;
+  }
 
-  render = () =>
+  render = () => (
     <div
       className={`
         content-margin
-        ${this.props.className || ''}
+        ${this.props.className || ""}
       `}
     >
       <button
         className={`
           timer-button
-          ${this.props.isActive && this.isValid ? 'timer-button--active' : ''}
-          ${!this.isValid ? 'timer-button--invalid' : ''}
+          ${this.props.isActive && this.isValid ? "timer-button--active" : ""}
+          ${!this.isValid ? "timer-button--invalid" : ""}
         `}
         onClick={this.handleOnClick}
       >
         <Duration duration={this.state.duration} />
       </button>
-    </div>;
+    </div>
+  );
 
   handleOnClick = () => {
     this.isValid && this.props.onClick(this.props.isActive);
-  }
+  };
 
   componentDidMount() {
     this.props.isActive && this.startDecrement();
@@ -59,13 +62,13 @@ export default class Timer extends Component {
 
   stopDecrement = () => {
     this.interval && clearInterval(this.interval);
-  }
+  };
 
   startDecrement = () => {
     this.interval = everySecondRun(this.decrement);
-  }
+  };
 
   decrement = () => {
-    this.setState(decrementFor('duration'));
-  }
+    this.setState(decrementFor("duration"));
+  };
 }

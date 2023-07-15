@@ -1,7 +1,7 @@
-export const toggleFor = key => prevState => ({
+export const toggleFor = (key) => (prevState) => ({
   [key]: !prevState[key],
 });
 
-export const decrementFor = key => prevState => ({
+export const decrementFor = (key) => (prevState) => ({
   [key]: prevState[key] - 1,
 });
