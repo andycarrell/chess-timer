@@ -1,27 +1,25 @@
-import { Component, useState } from "react";
-import Timers from "./components/Timers";
+import { useState } from "react";
+import { useMachine } from "react-robot";
+
+import { Timer } from "./components/Timer";
 import {
   RestartButton,
   PauseButton,
   DurationButton,
 } from "./components/IconButton";
 import DurationInput from "./components/DurationInput";
-import { toggleFor } from "./helpers";
+import { machine } from "./state/machine";
 import "./static/App.css";
 
-const DURATION_START_TOTAL = 600;
-
 export const App = () => {
-  const [state, setState] = useState({
-    isPaused: false,
-    isUpdating: false,
-    duration: DURATION_START_TOTAL,
-  });
+  const [current, send] = useMachine(machine);
+  const matches = (name: (typeof current)["name"]) => name === current.name;
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const renderInput = () => (
     <div className="content-margin">
       <DurationInput
-        defaultValue={state.duration / 60}
+        defaultValue={current.context.limit / 60 / 1000}
         onClick={handleOnInputSubmit}
         onCancel={handleOnInputCancel}
       />
@@ -30,55 +28,45 @@ export const App = () => {
 
   const renderActionButtons = () => (
     <div className="action-buttons">
-      <RestartButton onClick={handleOnRestart} />
+      <RestartButton onClick={() => send("reset")} />
       <div style={{ padding: "10px" }} />
-      <PauseButton onClick={handleOnPaused} />
+      <PauseButton onClick={() => send("pause")} />
       <div style={{ padding: "5px" }} />
       <DurationButton onClick={handleOnInputClick} />
     </div>
   );
 
   const handleOnInputSubmit = (duration: number) => {
-    setState(() => ({
-      isPaused: false,
-      isUpdating: false,
-      duration: duration * 60 + 0.1e-10,
-    }));
+    send({ type: "reset", limit: duration * 60 * 1000 });
+    setIsUpdating(false);
   };
 
   const handleOnInputCancel = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isPaused: false,
-      isUpdating: false,
-    }));
-  };
-
-  const handleOnRestart = () => {
-    setState((prevState) => ({
-      ...prevState,
-      duration: prevState.duration + 0.1e-10,
-      isPaused: false,
-    }));
-  };
-
-  const handleOnPaused = () => {
-    setState(toggleFor("isPaused"));
+    send("pause");
+    setIsUpdating(false);
   };
 
   const handleOnInputClick = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isUpdating: true,
-      isPaused: true,
-    }));
+    send("pause");
+    setIsUpdating(true);
   };
 
   return (
     <div className="App">
-      <Timers startDuration={state.duration} isPaused={state.isPaused}>
-        {state.isUpdating ? renderInput() : renderActionButtons()}
-      </Timers>
+      <div className="body">
+        <Timer
+          className="vertical-flip"
+          onClick={() => send("click1")}
+          duration={current.context.limit - current.context.elapsed1}
+          isActive={matches("play1")}
+        />
+        {isUpdating ? renderInput() : renderActionButtons()}
+        <Timer
+          onClick={() => send("click2")}
+          duration={current.context.limit - current.context.elapsed2}
+          isActive={matches("play2")}
+        />
+      </div>
     </div>
   );
 };
