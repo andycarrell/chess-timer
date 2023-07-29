@@ -1,0 +1,37 @@
+{
+  "name": "chess-timer",
+  "version": "1.0.0",
+  "author": "andycarrell",
+  "description": "",
+  "license": "ISC",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:andycarrell/esbuild-example.git"
+  },
+  "scripts": {
+    "build": "esbuild src/index.tsx --bundle --minify --outdir=dist --loader:.svg=dataurl",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prebuild": "npm run prime",
+    "prestart": "npm run prime",
+    "prime": "copyfiles public/* dist --up=1",
+    "start": "conc \"npm run types:check -- --watch\" \"npm run build -- --servedir=dist\"",
+    "types:check": "tsc"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-robot": "0.3.0",
+    "robot3": "0.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.17",
+    "@types/react-dom": "18.2.7",
+    "concurrently": "8.2.0",
+    "copyfiles": "2.4.1",
+    "esbuild": "0.18.17",
+    "prettier": "3.0.0",
+    "typescript": "5.1.6"
+  }
+}

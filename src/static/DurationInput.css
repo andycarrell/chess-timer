@@ -1,0 +1,22 @@
+.duration-input {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0px 10px;
+
+  background-color: grey;
+  border-radius: 3px;
+}
+
+.duration-input--input {
+  width: 100%;
+
+  padding: 10px;
+
+  font-size: 40px;
+  line-height: 64px;
+}
+
+.duration-input--actions {
+  display: flex;
+}
