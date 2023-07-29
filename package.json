@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-robot": "0.3.0",
+    "robot3": "0.4.0"
   },
   "devDependencies": {
     "@types/react": "18.2.15",
