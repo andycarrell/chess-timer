@@ -7,7 +7,7 @@ import {
   PauseButton,
   DurationButton,
 } from "./components/IconButton";
-import DurationInput from "./components/DurationInput";
+import { DurationInput } from "./components/DurationInput";
 import { machine } from "./state/machine";
 import "./static/App.css";
 
