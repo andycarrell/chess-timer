@@ -10,10 +10,6 @@
 
 `npm start`
 
-#### Built on
-
-[`create-react-app`](https://github.com/facebookincubator/create-react-app)
-
 #### Icons
 
 All icons have been sourced from flaticon.com, using
