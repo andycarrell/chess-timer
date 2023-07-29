@@ -26,11 +26,11 @@
     "robot3": "0.4.0"
   },
   "devDependencies": {
-    "@types/react": "18.2.15",
+    "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7",
     "concurrently": "8.2.0",
     "copyfiles": "2.4.1",
-    "esbuild": "0.18.13",
+    "esbuild": "0.18.17",
     "prettier": "3.0.0",
     "typescript": "5.1.6"
   }
